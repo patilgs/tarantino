@@ -1,7 +1,7 @@
-#Database change management system.
-= Introduction =
+= *Database change management* =
+== Introduction ==
 
 Tarantino Database change management provides a set of tools which make the process of propegating database schema and data changes to multiple environments frictionless.
 
-= Details =
+== Details ==
  * The system is based on a set of conventions which allows incremental changes to a database schema
