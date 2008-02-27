@@ -4,4 +4,20 @@
 Tarantino Database change management provides a set of tools which make the process of propagating database schema and data changes to multiple environments frictionless.
 
 == Details ==
- * The system is based on a set of conventions which allows incremental changes to a database schema
+ * The system is based on a set of conventions which allows incremental changes to a database schema.
+
+The conventions are to 
+Create
+Update
+
+{{{
+		<manageSqlDatabase
+			scriptDirectory="${database.script.directory}"
+			action="${action}"
+			server="${database.server}"
+			integratedAuthentication="${database.integrated}"
+			database="${database.name}"
+			username="${database.username}"
+			password="${database.password}"
+		/>
+}}}
