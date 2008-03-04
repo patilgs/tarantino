@@ -24,7 +24,7 @@ The proposed/ideal process that uses the Tarantino Database change management to
     * Create a change script that wraps all of the database changes into a single transactional change script.  A Tool like Red Gate SQL Compare makes this a 30 second operation.
     * Save the change script in to a folder in your source tree call Update.
     * Commit the change script along with the source code that corresponds to the change.
-
+  * Each developer runs the build script locally after receiving new schema changes scripts from the source code repository.
 
 
 
