@@ -3,6 +3,9 @@
 
 Tarantino Database change management provides a set of tools which make the process of propagating database schema and data changes to multiple environments frictionless.
 
+For a detailed presentation on this subject look at this: [http://tarantino.googlecode.com/svn/docs/Database-Change-Management.ppt Database Change Management]
+
+
 ===The problem that Database Change Management is attempting to solve:===
   * Most significant business applications rely on at least one relational database for persisting data
   * As new features are developed, database schema changes are often necessary – i.e. new tables, columns, views, and stored procedures
