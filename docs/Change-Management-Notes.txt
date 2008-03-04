@@ -1,0 +1,189 @@
+
+Demonstration Setup
+-------------------
+
+Subversion Setup
+1.  Download and Install Subversion Server
+2.  Create a new subversion repository using svnadmin
+3.  Commit "adnug before" to the new subversion repository
+
+CruiseControl.NET Setup
+1.  Checkout the new subversion repository to a working folder for CruiseControl.NET
+2.  Modify the CC.NET configuration file using the included ccnet.config (in root) as a guide
+
+Database Environment Setup (Development, Integration, Test and Production)
+1.  Create four new databases on your machine
+			- Adnug
+			- Adnug_Integration
+			- Adnug_Test
+			- Adnug_Production
+2.  Execute the initial table creation script on each database (look at InitialSchema.sql in root)
+3.  NOTE: All of the configuration files currently assume an instance name of ".".  For SQLExpress, a number of configuration files and build settings will need to be changed
+
+Application Environment Setup
+1.  Development: Checkout the subversion repository to a working folder for development
+			- Run the unit tests and the application to demonstrate the development environment setup is correct
+2.  Test: Create a new folder and configure the folder as an application in IIS
+3.  Production: Create a new folder and configure the folder as an application in IIS
+
+ADNUG Presentation
+------------------
+1.  Introduction
+			- Headspring Training
+				- February 20 - 22
+				- 15% Discount for people who mention ADNUG when they sign up
+
+			- Tarantino Overview
+
+				- Special Thanks to Eric Hexter
+
+				- Contents
+					- Database change management
+					- Application deployment tool
+					- Useful service classes for wrapping NHibernate, managing application configuration, importing data, etc.
+
+				- Contributors Welcome
+					- Make NAnt task work for MSBuild also
+					- Add support for other database providers such as Oracle, Sybase, etc.
+						- Already have a volunteer to implement MySQL support
+
+				- How To Obtain the Latest Binaries
+					- Navigate to project home page: http://code.google.com/p/tarantino
+						- svn checkout http://tarantino.googlecode.com/svn/trunk/LatestVersion tarantino-read-only
+
+2.  Diagnose Database Change-itis
+			- Cause: How do I migrate database schema changes from my developer database to 
+				- The CI, test, staging, and production databases
+
+			- Symptoms:			
+				- Are your development, testing, and production database schemas out of synch?
+
+				- Does your 4-developer, 1-tester team share a single developer/integration/test database?
+
+				- Do you bring a bottle of Tums to production deployments when database changes are deployed?
+
+				- Are you or one of your team members the designated database change whipping boy (or girl)
+
+				- Have you ever heard "Hey, did somebody just change a table/stored procedure/view?  My app just stopped working"?
+
+				- Are you morbidly afraid of renaming or deleting tables, columns, views, etc.?
+
+				- Are you ever tempted to reuse old fields you were terrified to delete to store new, unrelated data attributes?
+
+				- Does your "bug-free" software sometimes break when deployed to production due to database schema inconsistencies?
+
+			- Cures:
+				- Let each developer and tester manage their own personal database to prevent effort collision
+				
+				- Shift database change management tasks from deploy time to design time
+					- Changes won't be forgotten at design time
+					- Database changes, like other changes, can be validated via continuous integration, and traditional testing to uncover problems early
+
+				- Use tools like RedGate or SQL Server Management studio to generate change scripts
+
+				- Execute database change scripts through an automated process, rather than by hand
+
+3.  Provide Solution Overview
+			- Demonstration of the local working version
+			- Discussion of the four environments (Development, Integration, Test, Production)
+				- Database (view through Management Studio)
+				- Application (view through Firefox)
+
+4.  Implement Database Change Management Process
+
+			- If necessary, manually synchronize all database environment schemas first
+
+			- Create database script project
+				- Add new class library, Tarantino.Samples.Database
+				- Set project to not build in the solution properties
+				- Add ExistingSchema and Update folders
+				- Put table creation script for the SystemUser table in the Create folder
+
+			- Modify the build file
+				- Add properties and targets from databaseManagerTargets.build into default.build
+				- Modify local and cruise targets to first rebuild the database
+				- Add NAnt logic to the "package" target to copy the database into the package
+						<copy todir="${package.dir}\database" verbose="false">
+							<fileset basedir="src\Tarantino.Samples.Database">
+								<include name="**\*.sql" />
+							</fileset>
+						</copy>
+
+			- Test create, drop, update, and rebuildDatabase targets
+
+			- Modify the deployment file
+				- Add target from databaseManagerTargets.build into deployment.build
+					- action = update
+					- script.folder = database
+
+			- Commit and watch the build go green
+
+5.  Implement Database Change - Add "Favorite Speaker" Attribute To Member
+
+			- Add FavoriteSpeaker attribute to Member
+				- Add attribute through MemberTester
+				- Add attribute through MemberMappingsTester
+					- Observe that the test fails
+
+			- First Time Only: Create developer database snapshot
+				- Set up a new project within RedGate SQL Compare
+				- Save a snapshot of the database to the ADNUG root folder
+				- Modify the SQL Compare project to compare the developer database with the snapshot
+			
+			- Generate change script
+				- Add a new column, "FavoriteSpeaker" to the Member table
+				- Refresh the SQL Compare project
+				- Copy the resulting SQL into a new file 001_AddFavoriteSpeakerColumn.sql
+				
+			- Validate the database change
+				- Rebuild the database using the rebuildDatabase target
+				- Run the full suite of unit tests
+			
+			- Update the user interface to display and edit the new field
+				- Add a new column to the ViewMembers.aspx data grid
+				- Add a new row to the EditMember.aspx page with corresponding code-behind logic
+
+			- Commit
+
+6.  Deploy Datbase Change
+
+			- Deploy the application to test and production
+				- Use Tarantino Deployer to push the latest version to test
+				- Browse to the test and production environments and validate the changes have been made
+
+			- Explain the process
+				- Deploy again to test, this time examining the NAnt output
+				- Open the test database in management studio and show the contents of the usdAppliedDatabaseScript table
+				- Briefly discuss database versioning
+
+			- Cover advanced database changes
+				- Adding non-nullable columns
+				- Leveraging the transactional nature of RedGate-generated scripts
+
+7.  Questions
+
+8.  Time Permitting: Implement Another Database Change
+
+			- Add a second new attribute to Member
+			- Change the name of the attribute and rebuild the schema
+			- This time, do not commit the change to subversion
+				- Demonstrate how the build fails if the database scripts are not correct
+
+9.  Show Off The Database Change Manager UI
+
+10. RESET:
+			- Remove manageDatabase targets from default.build
+			- Remove references to rebuildDatabase target
+			- Remove logic to package database
+			- Remove logic to upgrade database on deployment
+			- Remove the database change management project completely
+			- Remove the FavoriteSpeaker attribute from Member
+			- Remove the FavoriteSpeaker user interface code from ViewMembers.aspx and EditMember.aspx
+			- Delete snapshot
+			- Delete usdAppliedDatabaseScript from all databases
+			- Remove FavoriteSpeaker column from all databases
+			- Run Z_DataLoaderTester against local database
+			- Commit
+			- Deploy the slimmed down version to test and production
+			- IISRESET
+			- Test applications
