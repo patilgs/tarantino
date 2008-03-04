@@ -30,11 +30,22 @@ The proposed/ideal process that uses the Tarantino Database change management to
 
 
 == Details ==
+To use the manage database tasks the following assemblies are need.  Place these in your NAnt binary directory:
+
+Tarantino.Core.dll
+Tarantino.DatabaseManager.Tasks.dll
+Microsoft.SqlServer.BatchParser.dll
+Microsoft.SqlServer.ConnectionInfo.dll
+Microsoft.SqlServer.Replication.dll
+Microsoft.SqlServer.Smo.dll
+StructureMap.dll
+
+
  * The system is based on a set of conventions which allows incremental changes to a database schema.
 
-The conventions are to 
-Create
-Update
+The conventions are to to create two subdirectories in you Database Scripts folder
+Create - This is where your initial Schema change scripts.
+Update - This is where your change scripts should be placed.  They should be named with the following convention ####-SCRIPTNAME.sql  where #### is the script number with leading zeros.  This will ensure that the first script 0001-firstSchemaChange.sql would get exectured first.
 
 {{{
 		<manageSqlDatabase
