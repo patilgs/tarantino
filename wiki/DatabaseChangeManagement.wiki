@@ -15,6 +15,16 @@ For a detailed presentation on this subject look at this: [http://tarantino.goog
   The development tools available allow developers to make changes to their environement and do not address the problem of applying those changes to additional environments. (i.e. development, quality assurance, staging, production).
 
 ===The solution to this problem:===
+Successful database change management requires that a consistent process be applied by all team members.  Without a consistent process than the tools provided in this solution will not provide its full value.
+
+The proposed/ideal process that uses the Tarantino Database change management tools, would consist of:
+  * Each developer using their own local database to do their development work.
+  * Each environment using it's own database.  i.e. Development, Testing, Staging, Production
+  * Each developer maintains his changes locally. When the database changes are ready to commit along side the application source code, the developer follows these steps:
+    * Create a change script that wraps all of the database changes into a single transactional change script.  A Tool like Red Gate SQL Compare makes this a 30 second operation.
+    * Save the change script in to a folder in your source tree call Update.
+    * Commit the change script along with the source code that corresponds to the change.
+
 
 
 
