@@ -33,6 +33,14 @@ The proposed/ideal process that uses the Tarantino Database change management to
   * Each developer runs the build script locally after receiving new schema changes scripts from the source code repository.
   * The testers, developers, change management managers execute the script using the Database Update (windows form) tool to run the database scripts against the Dev, Test, and staging environments when the environments receive their next update of the source code.
 
+===Prerequisites===
+The following environmental conditions make the use of the database change managment process frictionless.
+  * An automated build script.  This includes compillation, unit tests, integration tests, versioning, packaging, publishing
+  * Source Control (why do some people still think a zip file is source control?)
+  * A continous integration server that has a seperate database instance dedicated to executing schema change scripts and integration tests
+  * A team that believes that a little process can go a long way.
+  * Seperate environments for testers, marketing/content types, and staging.
+  * The will to do things better
 
 == Details ==
 To use the manage database tasks the following assemblies are need.  Place these in your NAnt binary directory:
