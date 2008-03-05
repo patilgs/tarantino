@@ -24,22 +24,27 @@ The proposed/ideal process that uses the Tarantino Database change management to
     * Create a change script that wraps all of the database changes into a single transactional change script.  A Tool like Red Gate SQL Compare makes this a 30 second operation.
     * Save the change script in to a folder in your source tree call Update.
     * Commit the change script along with the source code that corresponds to the change.
+  * The continous integration server detects changes to the source control repository than it:
+    * It builds the application code.  
+    * It executes the applications unit tests.
+    * Executes the database create task to create a new database with all of the changes that are in source control.
+    * Executes the projects integration (data access) tests.
+    * Marks the buils a success when all the tests pass.
   * Each developer runs the build script locally after receiving new schema changes scripts from the source code repository.
-
-
+  * The testers, developers, change management managers execute the script using the Database Update (windows form) tool to run the database scripts against the Dev, Test, and staging environments when the environments receive their next update of the source code.
 
 
 == Details ==
 To use the manage database tasks the following assemblies are need.  Place these in your NAnt binary directory:
 
-Tarantino.Core.dll
-Tarantino.DatabaseManager.Tasks.dll
-Microsoft.SqlServer.BatchParser.dll
-Microsoft.SqlServer.ConnectionInfo.dll
-Microsoft.SqlServer.Replication.dll
-Microsoft.SqlServer.Smo.dll
-StructureMap.dll
-
+ * Tarantino.Core.dll
+ * Tarantino.DatabaseManager.Tasks.dll
+ * Microsoft.SqlServer.BatchParser.dll
+ * Microsoft.SqlServer.ConnectionInfo.dll
+ * Microsoft.SqlServer.Replication.dll
+ * Microsoft.SqlServer.Smo.dll
+ * StructureMap.dll
+----
 
  * The system is based on a set of conventions which allows incremental changes to a database schema.
 
