@@ -1,0 +1,162 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{98F35D85-A0E4-4E30-8274-E0771122B401}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tarantino.UnitTests</RootNamespace>
+    <AssemblyName>Tarantino.UnitTests</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NHibernate, Version=1.2.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NHibernate\1.2.1\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Caches.SysCache, Version=1.2.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NHibernate\1.2.1\NHibernate.Caches.SysCache.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NUnit\2.4.3\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.3.0.906, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\RhinoMocks\3.3\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Core\Commons\Services\Environment\AssemblyContextTester.cs" />
+    <Compile Include="Core\Commons\Services\RandomDataCreation\CodeGeneratorTester.cs" />
+    <Compile Include="Core\Commons\Services\RandomDataCreation\RandomCharacterGeneratorTester.cs" />
+    <Compile Include="Core\Commons\Services\Security\ForgottenPasswordMailerTester.cs" />
+    <Compile Include="Core\Commons\Services\Security\ForgottenPasswordMailFactoryTester.cs" />
+    <Compile Include="Core\Commons\Services\Security\ForgottenPasswordServiceTester.cs" />
+    <Compile Include="Core\Commons\Services\Security\LoginServiceTester.cs" />
+    <Compile Include="Core\Commons\Services\Security\PrincipalFactoryTester.cs" />
+    <Compile Include="Core\Commons\Services\Security\RoleManagerTester.cs" />
+    <Compile Include="Core\Commons\Services\Security\SystemUserContextManagerTester.cs" />
+    <Compile Include="Core\DatabaseManager\Services\DatabaseActionExecutorFactoryTester.cs" />
+    <Compile Include="Core\DatabaseManager\Services\DatabaseActionResolverTester.cs" />
+    <Compile Include="Core\DatabaseManager\Services\DatabaseCreatorTester.cs" />
+    <Compile Include="Core\DatabaseManager\Services\DatabaseDropperTester.cs" />
+    <Compile Include="Core\DatabaseManager\Services\DatabaseUpdaterTester.cs" />
+    <Compile Include="Core\DatabaseManager\Services\LogMessageGeneratorTester.cs" />
+    <Compile Include="Core\DatabaseManager\Services\ScriptFolderExecutorTester.cs" />
+    <Compile Include="Core\WebManagement\Model\ApplicationInstanceTester.cs" />
+    <Compile Include="Core\WebManagement\Services\AdministratorSecurityCheckerTester.cs" />
+    <Compile Include="Core\WebManagement\Services\ApplicationInstanceCacheTester.cs" />
+    <Compile Include="Core\WebManagement\Services\ApplicationInstanceContextTester.cs" />
+    <Compile Include="Core\WebManagement\Services\ApplicationInstanceFactoryTester.cs" />
+    <Compile Include="Core\WebManagement\Services\ApplicationListingManagerTester.cs" />
+    <Compile Include="Core\WebManagement\Services\AvailabilityStatusUpdaterTester.cs" />
+    <Compile Include="Core\WebManagement\Services\CurrentApplicationInstanceRetrieverTester.cs" />
+    <Compile Include="Core\WebManagement\Services\ExceptionHandlingLoadBalanceStatusManagerTester.cs" />
+    <Compile Include="Core\WebManagement\Services\ExternalUrlCheckerTester.cs" />
+    <Compile Include="Core\WebManagement\Services\FileExtensionCheckerTester.cs" />
+    <Compile Include="Core\WebManagement\Services\LoadBalanceStatusManagerTester.cs" />
+    <Compile Include="Core\WebManagement\Services\MaintenancePageRedirectorTester.cs" />
+    <Compile Include="Core\WebManagement\Services\MaintenanceRedirectionCheckerTester.cs" />
+    <Compile Include="Core\WebManagement\Services\SecureAvailabilityStatusUpdaterTester.cs" />
+    <Compile Include="Core\WebManagement\Services\Views\ApplicationListingBodyViewTester.cs" />
+    <Compile Include="Core\WebManagement\Services\Views\ApplicationListingRowViewTester.cs" />
+    <Compile Include="Core\WebManagement\Services\Views\ApplicationListingViewTester.cs" />
+    <Compile Include="Core\WebManagement\Services\Views\LoadBalancerBodyViewTester.cs" />
+    <Compile Include="Core\WebManagement\Services\Views\LoadBalancerViewTester.cs" />
+    <Compile Include="Core\WebManagement\Services\Views\MenuViewTester.cs" />
+    <Compile Include="Core\WebManagement\Services\Views\PageViewTester.cs" />
+    <Compile Include="EnumerableAssert.cs" />
+    <Compile Include="Core\Commons\Model\Enumerations\BoundedEnumerationTester.cs" />
+    <Compile Include="Core\Commons\Model\Enumerations\EnumerationTester.cs" />
+    <Compile Include="Core\Commons\Model\PersistentObjectTester.cs" />
+    <Compile Include="Core\Commons\Services\Configuration\ApplicationSettingsTester.cs" />
+    <Compile Include="Core\Commons\Services\Configuration\ConfigurationReaderTester.cs" />
+    <Compile Include="Core\Commons\Services\Configuration\ElementCollectionTester.cs" />
+    <Compile Include="Core\Commons\Services\Repositories\CriterionSetTester.cs" />
+    <Compile Include="Core\Commons\Services\Repositories\CriterionTester.cs" />
+    <Compile Include="Core\Daemon\Services\ServiceAgentAggregatorTester.cs" />
+    <Compile Include="Core\Daemon\Services\ServiceRunnerTester.cs" />
+    <Compile Include="Core\Commons\Services\DataFileManagement\DataFileReaderTester.cs" />
+    <Compile Include="Core\Commons\Services\DataFileManagement\DataTableReaderTester.cs" />
+    <Compile Include="Core\Commons\Services\DataFileManagement\ExcelWorksheetReaderTester.cs" />
+    <Compile Include="Core\Commons\Services\Environment\DateContextTester.cs" />
+    <Compile Include="Core\Commons\Services\ListManagement\EnumerableAssert.cs" />
+    <Compile Include="Core\Commons\Services\ListManagement\EnumerableHelperTester.cs" />
+    <Compile Include="Core\Commons\Services\ListManagement\RichListTester.cs" />
+    <Compile Include="Core\Commons\Services\Security\AesEncryptionEngineTester.cs" />
+    <Compile Include="Core\Commons\Services\Security\LoginCheckerTester.cs" />
+    <Compile Include="Core\Commons\Services\Security\SecurityContextTester.cs" />
+    <Compile Include="Infrastructure\Commons\DataAccess\ORMapper\EnumerationTypeTester.cs" />
+    <Compile Include="Core\DatabaseManager\Model\ConnectionSettingsTester.cs" />
+    <Compile Include="Core\DatabaseManager\Services\ChangeScriptExecutorTester.cs" />
+    <Compile Include="Core\DatabaseManager\Services\ConnectionStringGeneratorTester.cs" />
+    <Compile Include="Core\DatabaseManager\Services\DatabaseConnectionDropperTester.cs" />
+    <Compile Include="Core\DatabaseManager\Services\SqlDatabaseManagerTester.cs" />
+    <Compile Include="Core\DatabaseManager\Services\DatabaseVersionerTester.cs" />
+    <Compile Include="Core\DatabaseManager\Services\SchemaInitializerTester.cs" />
+    <Compile Include="Core\DatabaseManager\Services\ScriptExecutionTrackerTester.cs" />
+    <Compile Include="Core\DatabaseManager\Services\SqlFileLocatorTester.cs" />
+    <Compile Include="Core\Commons\Services\DataFileManagement\TokenReplacerTester.cs" />
+    <Compile Include="Core\Deployer\Model\DeploymentTester.cs" />
+    <Compile Include="Core\Deployer\Services\Configuration\ApplicationRepositoryTester.cs" />
+    <Compile Include="Core\Deployer\Services\DeploymentFactoryTester.cs" />
+    <Compile Include="Core\Deployer\Services\DeploymentRecorderTester.cs" />
+    <Compile Include="Core\Deployer\Services\DeploymentResultCalculatorTester.cs" />
+    <Compile Include="Core\Deployer\Services\RevisionCertifierTester.cs" />
+    <Compile Include="Core\Deployer\Services\RevisionNumberParserTester.cs" />
+    <Compile Include="Core\Deployer\Services\UI\DeploymentFormValidatorTester.cs" />
+    <Compile Include="Core\Deployer\Services\UI\DeploymentRowFactoryTester.cs" />
+    <Compile Include="Core\Deployer\Services\UI\DeploymentSelectionValidatorTester.cs" />
+    <Compile Include="Core\Deployer\Services\UI\LabelTextGeneratorTester.cs" />
+    <Compile Include="Infrastructure\Deployer\DataAccess\Repositories\DeploymentRepositoryTester.cs" />
+    <Compile Include="Infrastructure\WebManagement\DataAccess\Repositories\ApplicationInstanceRepositoryTester.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tarantino.Core\Tarantino.Core.csproj">
+      <Project>{3F02EEBD-5B3B-4C5F-B2E7-4F5DFF6B3F03}</Project>
+      <Name>Tarantino.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tarantino.Infrastructure\Tarantino.Infrastructure.csproj">
+      <Project>{09CFC9B9-3915-4BB7-B5EB-E85D474D84A9}</Project>
+      <Name>Tarantino.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
